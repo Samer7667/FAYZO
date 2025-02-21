@@ -224,3 +224,36 @@ header {
         max-width: 20%; /* تقليل الحجم على الشاشات الكبيرة */
     }
 }
+/* ضبط عرض اللوقو ليكون متجاوبًا */
+.logo {
+    display: block;
+    width: 100px; /* يمكنك ضبط الحجم حسب الحاجة */
+    max-width: 30%; /* يجعل الشعار يتناسب مع حجم الشاشة */
+    height: auto;
+    margin: 10px auto;
+}
+
+/* تأكد من ظهور اللوقو في صفحة "من نحن" فقط */
+.about-page .logo {
+    display: block;
+}
+
+.index-page .logo,
+.login-page .logo {
+    display: block; /* سيظهر اللوقو في الصفحات الرئيسية وصفحة تسجيل الدخول */
+}
+
+/* تحسين تنسيق الهيدر بحيث يكون الشعار في المنتصف */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+/* دعم الأجهزة الصغيرة */
+@media (max-width: 600px) {
+    .logo {
+        width: 80px;
+    }
+}

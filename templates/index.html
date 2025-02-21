@@ -9,12 +9,14 @@
 </head>
 <body>
     <header>
+        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo">
         <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
         <div class="header-content">
-            <h1 class="welcome-text">مرحبًا، {{ username }} 👋</h1>
+            <h1>مرحبًا، {{ username }} 👋</h1>
         </div>
         <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
-    </header>    
+    </header>
+     
 
     <main class="container">
         <h2>حاسبة الأجرة 🚖</h2>
