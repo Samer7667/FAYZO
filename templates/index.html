@@ -7,57 +7,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-
     <header>
+        {% if request.path == '/about' %}
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="شعار التطبيق" class="logo">
-        <h1>حاسبة الأجرة 🚖</h1>
+    {% endif %}
+            <h1>مرحبًا، {{ username }} 👋</h1>
+            <button onclick="window.location.href='/about'" class="about-button" style="position: absolute; left: 10px; top: 10px;">من نحن</button>
+            <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
     </header>
-
     <main class="container">
-        <button id="gps-button">📍 استخدم GPS لتحديد موقع البداية</button>
-
+        <h2>حاسبة الأجرة 🚖</h2>
+        <button id="gps-button" class="primary-button">📍 استخدم GPS لتحديد موقع البداية</button>
         <form id="fare-form">
-            <!-- حقل مخفي لتخزين trip_id -->
             <input type="hidden" id="trip-id" name="trip_id">
-
             <div class="input-group">
                 <label>📍 إحداثيات الموقع الحالي:</label>
                 <input type="text" id="start-lat" name="start_lat" placeholder="خط العرض" readonly required>
                 <input type="text" id="start-lon" name="start_lon" placeholder="خط الطول" readonly required>
                 <input type="text" id="start-time" name="start_time" placeholder="وقت البدء" readonly>
             </div>
-
-            <button type="button" id="gps-destination">📍 استخدم GPS لتحديد الوجهة</button>
-
+            <button type="button" id="gps-destination" class="primary-button">📍 استخدم GPS لتحديد الوجهة</button>
             <div class="input-group">
                 <label>📍 إحداثيات الوجهة:</label>
                 <input type="text" id="end-lat" name="end_lat" placeholder="خط العرض" required>
                 <input type="text" id="end-lon" name="end_lon" placeholder="خط الطول" required>
             </div>
-
-            <button type="submit">💰 احسب الأجرة</button>
+            <div class="timer-controls">
+                <button type="button" id="start-timer" class="success-button">▶️ ابدأ العداد</button>
+                <button type="button" id="pause-timer" class="warning-button">⏸️ إيقاف مؤقت</button>
+                <button type="button" id="resume-timer" class="info-button">▶️ استئناف</button>
+                <button type="button" id="end-trip" class="danger-button">🛑 إنهاء الرحلة</button>
+            </div>
+            <button type="submit" class="calculate-button">💰 احسب الأجرة</button>
         </form>
-
         <p id="fare-result">الأجرة: -- ريال</p>
-
-        <h2>⏳ وقت الرحلة:</h2>
-        <p id="trip-timer">00:00:00</p>
-        
-        <div class="button-group">
-            <button id="pause-timer">⏸️ إيقاف مؤقت</button>
-            <button id="resume-timer">▶️ استئناف الرحلة</button>
-            <button id="stop-timer">⏹️ إنهاء الرحلة</button>
-        </div>
-
-        <h2>📜 سجل المشاوير:</h2>
-        <ul id="trip-history"></ul>
+        <footer>
+            <p>&copy; 2025 جميع الحقوق محفوظة. لا يُسمح بإعادة نشر أو توزيع أي جزء من هذا الموقع دون إذن مسبق من المالك.</p>
+        </footer>
     </main>
-
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    <footer style="text-align: center; padding: 10px; background-color: #f8f9fa; position: fixed; bottom: 0; width: 100%;">
-        <p>&copy; {{ current_year }} جميع الحقوق محفوظة. لا يُسمح بإعادة نشر أو توزيع أي جزء من هذا الموقع دون إذن مسبق من المالك.</p>
-    </footer>
-    
 </body>
 </html>

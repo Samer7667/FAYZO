@@ -1,62 +1,40 @@
-/* تحسين الخطوط والألوان */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f8f9fa;
+    text-align: center;
     margin: 0;
     padding: 0;
+    transition: background-color 0.5s ease;
 }
 
-/* تحسين الشعار */
-header {
-    background-color: #2ecc71;
-    padding: 15px;
-    color: white;
+.login-body {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
-.logo {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
-}
-
-/* تحسين استجابة الحقول */
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: auto;
+.login-container {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: scale(0.9);
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
 
-/* تحسين شكل المدخلات */
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-input:focus {
-    border-color: #2ecc71;
-    outline: none;
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
-}
-
-/* تحسين الأزرار */
 button {
     background-color: #2ecc71;
     color: white;
@@ -67,78 +45,85 @@ button {
     border: none;
     border-radius: 5px;
     margin-top: 10px;
-    transition: background 0.3s ease-in-out, transform 0.1s;
+    transition: background 0.3s ease;
 }
 
 button:hover {
     background-color: #27ae60;
-    transform: scale(1.05);
 }
 
 button:active {
     transform: scale(0.95);
 }
 
-/* تخصيص أزرار التحكم بالوقت */
-#pause-timer, #resume-timer {
-    background-color: #f39c12;
-}
-
-#pause-timer:hover, #resume-timer:hover {
-    background-color: #e67e22;
-}
-
-#stop-timer {
+.logout-button {
     background-color: #e74c3c;
+    padding: 8px;
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: auto;
+    min-width: 100px;
 }
 
-#stop-timer:hover {
+.logout-button:hover {
     background-color: #c0392b;
 }
 
-/* تحسين شكل سجل المشاوير */
-ul {
-    list-style: none;
-    padding: 0;
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
-
-ul li {
-    background: #e3f2fd;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
+.about-button, .logout-button {
+    background-color: #2ecc71;
+    color: white;
     font-size: 14px;
-    text-align: left;
+    cursor: pointer;
+    padding: 8px;
+    width: auto;
+    min-width: 120px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background 0.3s ease;
 }
 
-/* تحسين تخطيط الأزرار */
-.button-group {
+.about-button:hover, .logout-button:hover {
+    background-color: #27ae60;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
+/* جعل الأزرار والمربعات متوافقة مع جميع الأجهزة */
+.container {
+    max-width: 90%;
+    margin: auto;
+}
+
+button {
+    width: auto;
+    min-width: 150px;
+}
+
+/* تنسيق الحقول لتكون تحت بعضها */
+.input-group {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-/* تحسين استجابة التصميم للأجهزة الصغيرة */
-@media (max-width: 600px) {
-    .container {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .logo {
-        width: 40px;
-    }
-
-    button {
-        font-size: 14px;
-    }
-
-    input {
-        font-size: 14px;
-    }
-
-    .button-group {
-        flex-direction: column;
-    }
+.input-group label,
+.input-group input {
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 5px;
 }

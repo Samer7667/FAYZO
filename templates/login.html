@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - حاسبة الأجرة 🚖</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <h2>🚖 تسجيل الدخول</h2>
+        <form action="/login" method="POST" class="login-form">
+            <div class="input-group">
+                <input type="text" name="username" placeholder="أدخل اسمك" required>
+            </div>
+            <div class="input-group">
+                <button type="submit">تسجيل الدخول</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

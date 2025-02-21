@@ -1,141 +1,95 @@
-let startTime, timerInterval, pauseTime = 0, isPaused = false, tripId = Date.now().toString();
-
-// 🔹 زر تحديد الموقع الحالي (GPS)
-document.getElementById("gps-button").addEventListener("click", function() {
-    getLocation("start-lat", "start-lon", "start-time");
-});
-
-// 🔹 زر تحديد الوجهة (GPS)
-document.getElementById("gps-destination").addEventListener("click", function() {
-    getLocation("end-lat", "end-lon");
-});
-
-// 📌 وظيفة جلب الموقع الجغرافي
-function getLocation(latField, lonField, timeField = null) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            let latitude = position.coords.latitude;
-            let longitude = position.coords.longitude;
-
-            document.getElementById(latField).value = latitude;
-            document.getElementById(lonField).value = longitude;
-
-            if (timeField) {
-                document.getElementById(timeField).value = new Date().toLocaleTimeString();
-                startTimer(); // بدء العداد عند تحديد نقطة الانطلاق
-                document.getElementById("trip-id").value = tripId; // حفظ trip_id
-            }
-        }, function(error) {
-            alert("تعذر الحصول على الموقع: " + error.message);
-        });
-    } else {
-        alert("المتصفح لا يدعم تحديد الموقع الجغرافي.");
-    }
-}
-
-// 📌 حساب الأجرة وإرسال البيانات للسيرفر
-document.getElementById("fare-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    let formData = new FormData(this);
-    formData.append("trip_id", tripId); // إرسال trip_id مع الطلب
-
-    fetch("/calculate", {
-        method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            alert(data.error);
-        } else {
-            document.getElementById("fare-result").innerText = `الأجرة: ${data.fare} ريال`;
-            saveTrip();
-        }
-    })
-    .catch(error => console.error("خطأ:", error));
-});
-
-// ⏳ بدء العداد
-function startTimer() {
-    if (!isPaused) {
-        startTime = new Date() - pauseTime;
-    }
+document.addEventListener("DOMContentLoaded", function() {
+    const gpsButton = document.getElementById("gps-button");
+    const gpsDestinationButton = document.getElementById("gps-destination");
+    const fareForm = document.getElementById("fare-form");
+    const fareResult = document.getElementById("fare-result");
+    const startTimerButton = document.getElementById("start-timer");
+    const pauseTimerButton = document.getElementById("pause-timer");
+    const resumeTimerButton = document.getElementById("resume-timer");
+    const endTripButton = document.getElementById("end-trip");
     
-    isPaused = false;
-    timerInterval = setInterval(updateTimer, 1000);
-}
+    let timerInterval;
+    let elapsedTime = 0;
+    let isPaused = false;
 
-// ⏸️ إيقاف مؤقت للعداد
-document.getElementById("pause-timer").addEventListener("click", function() {
-    clearInterval(timerInterval);
-    isPaused = true;
-    pauseTime = new Date() - startTime;
+    if (gpsButton) {
+        gpsButton.addEventListener("click", function() {
+            getLocation("start-lat", "start-lon", "start-time");
+        });
+    }
 
-    fetch("/pause_trip", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `trip_id=${tripId}`
-    });
-});
+    if (gpsDestinationButton) {
+        gpsDestinationButton.addEventListener("click", function() {
+            getLocation("end-lat", "end-lon");
+        });
+    }
 
-// ▶️ استئناف العداد بعد التوقف
-document.getElementById("resume-timer").addEventListener("click", function() {
-    startTimer();
+    if (fareForm) {
+        fareForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+            fetch("/calculate", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                fareResult.innerText = `الأجرة: ${data.fare} ريال`;
+            })
+            .catch(error => console.error("خطأ:", error));
+        });
+    }
 
-    fetch("/resume_trip", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `trip_id=${tripId}`
-    });
-});
-
-// ⏹️ إنهاء الرحلة
-document.getElementById("stop-timer").addEventListener("click", function() {
-    clearInterval(timerInterval);
-    saveTrip();
-});
-
-// 📌 تحديث العداد
-function updateTimer() {
-    let elapsedTime = new Date() - startTime;
-    let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-    let minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
-
-    document.getElementById("trip-timer").innerText = 
-        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-}
-
-// 📜 حفظ سجل المشاوير
-function saveTrip() {
-    let tripData = {
-        trip_id: tripId,
-        start: {
-            lat: document.getElementById("start-lat").value,
-            lon: document.getElementById("start-lon").value,
-            time: document.getElementById("start-time").value
-        },
-        end: {
-            lat: document.getElementById("end-lat").value,
-            lon: document.getElementById("end-lon").value
-        },
-        fare: document.getElementById("fare-result").innerText
-    };
-
-    fetch("/save_trip", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tripData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.message) {
-            let tripHistory = document.getElementById("trip-history");
-            let tripItem = document.createElement("li");
-            tripItem.innerText = `رحلة من (${tripData.start.lat}, ${tripData.start.lon}) إلى (${tripData.end.lat}, ${tripData.end.lon}) - ${tripData.fare}`;
-            tripHistory.appendChild(tripItem);
+    function getLocation(latField, lonField, timeField = null) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                document.getElementById(latField).value = position.coords.latitude;
+                document.getElementById(lonField).value = position.coords.longitude;
+                if (timeField) {
+                    document.getElementById(timeField).value = new Date().toLocaleTimeString();
+                }
+            }, function(error) {
+                alert("تعذر الحصول على الموقع: " + error.message);
+            });
+        } else {
+            alert("المتصفح لا يدعم تحديد الموقع الجغرافي.");
         }
-    })
-    .catch(error => console.error("خطأ أثناء حفظ الرحلة:", error));
-}
+    }
+
+    function startTimer() {
+        elapsedTime = 0;
+        isPaused = false;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            if (!isPaused) {
+                elapsedTime++;
+                startTimerButton.innerText = `الوقت: ${elapsedTime} ثانية`;
+            }
+        }, 1000);
+    }
+
+    function pauseTimer() {
+        isPaused = true;
+    }
+
+    function resumeTimer() {
+        isPaused = false;
+    }
+
+    function endTrip() {
+        clearInterval(timerInterval);
+        elapsedTime = 0;
+        startTimerButton.innerText = "ابدأ العداد";
+    }
+
+    if (startTimerButton) startTimerButton.addEventListener("click", startTimer);
+    if (pauseTimerButton) pauseTimerButton.addEventListener("click", pauseTimer);
+    if (resumeTimerButton) resumeTimerButton.addEventListener("click", resumeTimer);
+    if (endTripButton) endTripButton.addEventListener("click", endTrip);
+
+    // تحسين الأزرار وجعلها متجاوبة بدون اهتزاز الموقع
+    document.querySelectorAll("button").forEach(button => {
+        button.style.transition = "none"; // منع أي تأثير تكبير أثناء التحويم
+    });
+
+});
