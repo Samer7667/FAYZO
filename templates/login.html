@@ -8,7 +8,8 @@
 </head>
 <body class="login-body">
     <div class="login-container">
-        <h2>🚖 تسجيل الدخول</h2>
+        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="شعار الموقع" class="logo">
+<h2>🚖 تسجيل الدخول</h2>
         <form action="/login" method="POST" class="login-form">
             <div class="input-group">
                 <input type="text" name="username" placeholder="أدخل اسمك" required>

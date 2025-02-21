@@ -204,3 +204,23 @@ header {
     display: block;
     margin: 10px auto; /* يجعل اللوقو في المنتصف */
 }
+.logo {
+    display: block;
+    margin: 20px auto;
+    max-width: 40%; /* يتحكم في الحجم النسبي */
+    height: auto;
+}
+
+/* تحسين التناسب على الجوالات */
+@media (max-width: 600px) {
+    .logo {
+        max-width: 60%; /* زيادة الحجم على الشاشات الصغيرة */
+    }
+}
+
+/* تحسين التناسب على الشاشات الكبيرة */
+@media (min-width: 1200px) {
+    .logo {
+        max-width: 20%; /* تقليل الحجم على الشاشات الكبيرة */
+    }
+}
