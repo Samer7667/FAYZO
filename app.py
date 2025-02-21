@@ -37,7 +37,7 @@ def login():
 def home():
     if 'username' not in session:
         return redirect(url_for('login_page'))
-    return render_template('index.html', username=session['username'], owner_name="سامر عبدالعزيز الفيفي", owner_phone="0535620007")
+    return render_template('index.html', username=session.get('username', 'مستخدم مجهول'))
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -67,6 +67,7 @@ def calculate():
 def logout():
     session.pop('username', None)
     return redirect(url_for('login_page'))
+
 @app.route('/about')
 def about_page():
     return render_template('about.html')

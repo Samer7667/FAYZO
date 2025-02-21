@@ -10,12 +10,14 @@
     <header>
         <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
         <div class="header-content">
-            <h1>مرحبًا، {{ username }} 👋</h1>
+            <h1 class="welcome-text">مرحبًا، {{ username }} 👋</h1>
         </div>
         <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
     </header>    
+
     <main class="container">
         <h2>حاسبة الأجرة 🚖</h2>
+
         <button id="gps-button" class="primary-button">📍 استخدم GPS لتحديد موقع البداية</button>
         <form id="fare-form">
             <input type="hidden" id="trip-id" name="trip_id">
