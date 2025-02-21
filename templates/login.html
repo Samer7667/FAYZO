@@ -7,25 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body class="login-body">
-    <header>
-        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo">
-        <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
-        <div class="header-content">
-            <h1>مرحبًا، {{ username }} 👋</h1>
-        </div>
-        <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
-    </header>
-    
     <div class="login-container">
         <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="شعار الموقع" class="logo">
-<h2>🚖 تسجيل الدخول</h2>
-        <form action="/login" method="POST" class="login-form">
-            <div class="input-group">
-                <input type="text" name="username" placeholder="أدخل اسمك" required>
-            </div>
-            <div class="input-group">
-                <button type="submit">تسجيل الدخول</button>
-            </div>
+        <h2>🚖 تسجيل الدخول</h2>
+        <form action="/login" method="POST">
+            <input type="text" name="username" placeholder="أدخل اسمك" required>
+            <button type="submit">تسجيل الدخول</button>
         </form>
     </div>
 </body>

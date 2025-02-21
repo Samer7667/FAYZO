@@ -1,3 +1,4 @@
+/* ضبط التصميم الأساسي */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -7,13 +8,14 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* تحسين تصميم صفحة تسجيل الدخول */
+/* ضبط تصميم صفحة تسجيل الدخول */
 .login-body {
     background: linear-gradient(135deg, #2ecc71, #27ae60);
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    flex-direction: column;
 }
 
 .login-container {
@@ -23,20 +25,16 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transform: scale(0.9);
     animation: fadeIn 0.5s ease-in-out forwards;
+    width: 90%;
+    max-width: 400px;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-/* تحسين تصميم الأزرار */
+/* تنسيق الأزرار */
 button {
     background-color: #2ecc71;
     color: white;
@@ -47,70 +45,45 @@ button {
     border-radius: 5px;
     margin-top: 10px;
     transition: background 0.3s ease;
+    width: 100%;
+    max-width: 200px;
 }
 
-button:hover {
-    background-color: #27ae60;
-}
+button:hover { background-color: #27ae60; }
+button:active { transform: scale(0.95); }
 
-button:active {
-    transform: scale(0.95);
-}
-
-/* تحسين تصميم زر تسجيل الخروج */
+/* تصميم زر تسجيل الخروج */
 .logout-button {
     background-color: #e74c3c;
-    padding: 8px;
-    font-size: 14px;
     position: absolute;
     top: 10px;
     right: 10px;
+    width: auto;
     min-width: 100px;
-    border-radius: 5px;
 }
 
-.logout-button:hover {
-    background-color: #c0392b;
-}
+.logout-button:hover { background-color: #c0392b; }
 
-/* إخفاء اللوقو في الصفحة الرئيسية وإظهاره فقط في صفحة "من نحن" */
+/* تنسيق الشعار */
 .logo {
-    display: none; /* إخفاء الصورة في الصفحة الرئيسية */
-    width: 80px;
+    width: 120px;
     height: auto;
-    margin: 10px auto;
+    display: block;
+    margin: 20px auto;
 }
 
 .about-page .logo {
-    display: block; /* إظهار الصورة فقط في صفحة "من نحن" */
+    display: block;
 }
 
-/* وضع زر "من نحن" في الزاوية العلوية اليسرى */
-.about-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #2ecc71;
-    padding: 10px 15px;
-    border-radius: 5px;
-}
-
-.about-button:hover {
-    background-color: #27ae60;
-}
-
-/* جعل الأزرار والمحتوى متجاوب مع جميع الأجهزة */
+/* تنسيق الصفحة الرئيسية */
 .container {
     max-width: 90%;
     margin: auto;
+    padding: 20px;
 }
 
-button {
-    width: auto;
-    min-width: 150px;
-}
-
-/* ترتيب الحقول لتكون تحت بعضها */
+/* تنسيق الحقول */
 .input-group {
     display: flex;
     flex-direction: column;
@@ -118,142 +91,35 @@ button {
     margin-bottom: 15px;
 }
 
-.input-group label,
-.input-group input {
-    width: 80%;
-    max-width: 300px;
-    margin-bottom: 5px;
-}
-
-/* تنسيق العنوان وجعله في المنتصف */
-header {
-    display: flex;
-    justify-content: center; /* لجعل المحتوى في المنتصف */
-    align-items: center;
-    padding: 10px;
-    flex-wrap: wrap;
-    position: relative;
-}
-
-.header-content {
-    flex-grow: 1; /* يجعل النص يتمدد ليبقى في المنتصف */
-    text-align: center;
-}
-
-/* دعم العرض على الشاشات الصغيرة */
-@media (max-width: 600px) {
-    button {
-        font-size: 14px;
-        padding: 10px;
-        width: 100%;
-    }
-
-    .about-button,
-    .logout-button {
-        position: static;
-        display: block;
-        width: 100%;
-        margin: 5px auto;
-    }
-}
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 15px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
 .input-group input {
     width: 90%;
+    max-width: 300px;
     padding: 10px;
     margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-/* ترتيب الأزرار بشكل متجاوب */
+/* ضبط العناوين */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* تنسيق الصفحات المتجاوبة */
+@media (max-width: 600px) {
+    button { font-size: 14px; padding: 10px; width: 100%; }
+    .container { padding: 10px; }
+    .input-group input { width: 100%; }
+}
+
 @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .input-group input {
-        width: 100%;
-    }
-
     .timer-controls {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
     }
-
     .timer-controls button {
         width: 48%;
         margin: 5px;
-    }
-}
-.logo {
-    width: 100px; /* يمكنك تغيير الحجم حسب الحاجة */
-    height: auto;
-    display: block;
-    margin: 10px auto; /* يجعل اللوقو في المنتصف */
-}
-.logo {
-    display: block;
-    margin: 20px auto;
-    max-width: 40%; /* يتحكم في الحجم النسبي */
-    height: auto;
-}
-
-/* تحسين التناسب على الجوالات */
-@media (max-width: 600px) {
-    .logo {
-        max-width: 60%; /* زيادة الحجم على الشاشات الصغيرة */
-    }
-}
-
-/* تحسين التناسب على الشاشات الكبيرة */
-@media (min-width: 1200px) {
-    .logo {
-        max-width: 20%; /* تقليل الحجم على الشاشات الكبيرة */
-    }
-}
-/* ضبط عرض اللوقو ليكون متجاوبًا */
-.logo {
-    display: block;
-    width: 100px; /* يمكنك ضبط الحجم حسب الحاجة */
-    max-width: 30%; /* يجعل الشعار يتناسب مع حجم الشاشة */
-    height: auto;
-    margin: 10px auto;
-}
-
-/* تأكد من ظهور اللوقو في صفحة "من نحن" فقط */
-.about-page .logo {
-    display: block;
-}
-
-.index-page .logo,
-.login-page .logo {
-    display: block; /* سيظهر اللوقو في الصفحات الرئيسية وصفحة تسجيل الدخول */
-}
-
-/* تحسين تنسيق الهيدر بحيث يكون الشعار في المنتصف */
-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-}
-
-/* دعم الأجهزة الصغيرة */
-@media (max-width: 600px) {
-    .logo {
-        width: 80px;
     }
 }
