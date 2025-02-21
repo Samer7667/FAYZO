@@ -65,44 +65,40 @@ button:active {
     right: 10px;
     width: auto;
     min-width: 100px;
+    border-radius: 5px;
 }
 
 .logout-button:hover {
     background-color: #c0392b;
 }
 
+/* إخفاء اللوقو في الصفحة الرئيسية وإظهاره فقط في صفحة "من نحن" */
 .logo {
     width: 80px;
     height: auto;
-    display: block;
-    margin: 0 auto;
-}
-.about-button, .logout-button {
-    background-color: #2ecc71;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 8px;
-    width: auto;
-    min-width: 120px;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    transition: background 0.3s ease;
-}
-
-.about-button:hover, .logout-button:hover {
-    background-color: #27ae60;
-}
-
-.logo {
-    width: 80px;
-    height: auto;
-    display: block;
+    display: none; /* إخفاء الصورة في الصفحة الرئيسية */
     margin: 10px auto;
 }
 
-/* جعل الأزرار والمربعات متوافقة مع جميع الأجهزة */
+.about-page .logo {
+    display: block; /* إظهار الصورة فقط في صفحة "من نحن" */
+}
+
+/* تنسيق زر "من نحن" وجعله في الزاوية اليسرى العلوية */
+.about-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #2ecc71;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.about-button:hover {
+    background-color: #27ae60;
+}
+
+/* جعل الأزرار والمحتوى متجاوب مع جميع الأجهزة */
 .container {
     max-width: 90%;
     margin: auto;
@@ -113,7 +109,7 @@ button {
     min-width: 150px;
 }
 
-/* تنسيق الحقول لتكون تحت بعضها */
+/* ترتيب الحقول لتكون تحت بعضها */
 .input-group {
     display: flex;
     flex-direction: column;
@@ -126,4 +122,105 @@ button {
     width: 80%;
     max-width: 300px;
     margin-bottom: 5px;
+}
+
+/* تحسين تنسيق العنوان والأزرار في الهيدر */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+button {
+    font-size: 16px;
+    padding: 12px;
+    width: auto;
+    min-width: 120px;
+}
+
+/* دعم العرض على الشاشات الصغيرة */
+@media (max-width: 600px) {
+    button {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .about-button,
+    .logout-button {
+        position: static;
+        display: block;
+        width: 100%;
+        margin: 5px auto;
+    }
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* ترتيب الأزرار بشكل متجاوب */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-group input {
+        width: 100%;
+    }
+
+    .timer-controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .timer-controls button {
+        width: 48%;
+        margin: 5px;
+    }
+}
+header {
+    display: flex;
+    justify-content: center; /* لجعل المحتوى في المنتصف */
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.header-content {
+    flex-grow: 1; /* يجعل النص يتمدد ليبقى في المنتصف */
+    text-align: center;
+}
+
+.about-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.logout-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

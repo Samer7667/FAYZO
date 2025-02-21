@@ -8,13 +8,12 @@
 </head>
 <body>
     <header>
-        {% if request.path == '/about' %}
-        <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="شعار التطبيق" class="logo">
-    {% endif %}
+        <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
+        <div class="header-content">
             <h1>مرحبًا، {{ username }} 👋</h1>
-            <button onclick="window.location.href='/about'" class="about-button" style="position: absolute; left: 10px; top: 10px;">من نحن</button>
-            <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
-    </header>
+        </div>
+        <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
+    </header>    
     <main class="container">
         <h2>حاسبة الأجرة 🚖</h2>
         <button id="gps-button" class="primary-button">📍 استخدم GPS لتحديد موقع البداية</button>
