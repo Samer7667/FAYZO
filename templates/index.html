@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <link rel="icon" type="image/webp" href="{{ url_for('static', filename='images/taxi_logo.webp') }}">
-    <!-- تحسين مشاركة الرابط في وسائل التواصل -->
-<meta property="og:title" content="حاسبة الأجرة 🚖">
-<meta property="og:description" content="احسب أجرتك بكل سهولة ودقة">
-<meta property="og:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
-<meta property="og:url" content="https://taxi-fare-app.onrender.com">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+    <!-- أيقونة الموقع (favicon) -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/taxi_logo.webp') }}">
+
+    <!-- تحسين مشاركة الرابط على وسائل التواصل -->
+    <meta property="og:title" content="حاسبة الأجرة 🚖">
+    <meta property="og:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
+    <meta property="og:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
+    <meta property="og:url" content="https://taxi-fare-app.onrender.com">
+    <meta property="og:type" content="website">
+
+    <!-- تحسين مشاركة الرابط على تويتر -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="حاسبة الأجرة 🚖">
+    <meta name="twitter:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
+    <meta name="twitter:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حاسبة الأجرة 🚖</title>
+
+    <!-- استدعاء ملف الـ CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -23,8 +33,7 @@
         </div>
         <button onclick="window.location.href='/logout'" class="logout-button">تسجيل الخروج</button>
     </header>
-     
-
+    
     <main class="container">
         <h2>حاسبة الأجرة 🚖</h2>
 
@@ -56,6 +65,7 @@
             <p>&copy; 2025 جميع الحقوق محفوظة. لا يُسمح بإعادة نشر أو توزيع أي جزء من هذا الموقع دون إذن مسبق من المالك.</p>
         </footer>
     </main>
+    
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
