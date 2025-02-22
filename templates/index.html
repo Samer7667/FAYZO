@@ -26,8 +26,7 @@
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo">
-        <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
+        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo" style=" visibility: hidden;">
         <div class="header-content">
             <h1>مرحبًا، {{ username }} 👋</h1>
         </div>
@@ -63,6 +62,7 @@
         <p id="fare-result">الأجرة: -- ريال</p>
         <footer>
             <p>&copy; 2025 جميع الحقوق محفوظة. لا يُسمح بإعادة نشر أو توزيع أي جزء من هذا الموقع دون إذن مسبق من المالك.</p>
+            <button onclick="window.location.href='/about'" class="about-button">من نحن</button>
         </footer>
     </main>
     
