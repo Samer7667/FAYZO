@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pauseTimerButton = document.getElementById("pause-timer");
     const resumeTimerButton = document.getElementById("resume-timer");
     const endTripButton = document.getElementById("end-trip");
-    
+
     let timerInterval;
     let elapsedTime = 0;
     let isPaused = false;
@@ -93,19 +93,19 @@ document.addEventListener("DOMContentLoaded", function() {
         let startLon = document.getElementById("start-lon").value;
         let endLat = document.getElementById("end-lat").value;
         let endLon = document.getElementById("end-lon").value;
-    
+
         if (!startLat || !startLon || !endLat || !endLon) {
             alert("يجب إدخال الإحداثيات لحفظ الرحلة.");
             return;
         }
-    
+
         let formData = new FormData();
         formData.append("start_lat", startLat);
         formData.append("start_lon", startLon);
         formData.append("end_lat", endLat);
         formData.append("end_lon", endLon);
         formData.append("duration", elapsedTime);
-    
+
         fetch("/save_trip", {
             method: "POST",
             body: formData
@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => console.error("خطأ:", error));
+    }
 
     // ربط أزرار العداد بالدوال
     if (startTimerButton) startTimerButton.addEventListener("click", startTimer);
@@ -130,5 +131,5 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll("button").forEach(button => {
         button.style.transition = "none"; // منع أي تأثير تكبير أثناء التحويم
     });
-    
+
 });
