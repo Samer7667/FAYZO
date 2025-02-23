@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/taxi_logo.webp') }}">
 
     <!-- تحسين مشاركة الرابط على وسائل التواصل -->
-    <meta property="og:title" content="حاسبة الأجرة 🚖">
+    <meta property="og:title" content="FAYZO - حاسبة الأجرة">
     <meta property="og:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
     <meta property="og:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
     <meta property="og:url" content="https://taxi-fare-app.onrender.com">
@@ -13,20 +13,21 @@
 
     <!-- تحسين مشاركة الرابط على تويتر -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="حاسبة الأجرة 🚖">
+    <meta name="twitter:title" content="FAYZO - حاسبة الأجرة">
     <meta name="twitter:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
     <meta name="twitter:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حاسبة الأجرة 🚖</title>
+    <title>FAYZO - حاسبة الأجرة</title>
 
     <!-- استدعاء ملف الـ CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo" style=" visibility: hidden;">
+        <!-- الشعار (مخفٍ حاليًا) -->
+        <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="Logo" class="logo" style="visibility: hidden;">
         <div class="header-content">
             <h1>مرحبًا، {{ username }} 👋</h1>
         </div>
@@ -34,32 +35,44 @@
     </header>
     
     <main class="container">
-        <h2>حاسبة الأجرة 🚖</h2>
+        <h2>FAYZO🚖</h2>
 
+        <!-- زر تحديد الموقع الحالي -->
         <button id="gps-button" class="primary-button">📍 استخدم GPS لتحديد موقع البداية</button>
+
         <form id="fare-form">
             <input type="hidden" id="trip-id" name="trip_id">
+
             <div class="input-group">
                 <label>📍 إحداثيات الموقع الحالي:</label>
                 <input type="text" id="start-lat" name="start_lat" placeholder="خط العرض" readonly required>
                 <input type="text" id="start-lon" name="start_lon" placeholder="خط الطول" readonly required>
                 <input type="text" id="start-time" name="start_time" placeholder="وقت البدء" readonly>
             </div>
+
+            <!-- زر تحديد وجهة الرحلة -->
             <button type="button" id="gps-destination" class="primary-button">📍 استخدم GPS لتحديد الوجهة</button>
+
             <div class="input-group">
                 <label>📍 إحداثيات الوجهة:</label>
                 <input type="text" id="end-lat" name="end_lat" placeholder="خط العرض" required>
                 <input type="text" id="end-lon" name="end_lon" placeholder="خط الطول" required>
             </div>
+
             <div class="timer-controls">
                 <button type="button" id="start-timer" class="success-button">▶️ ابدأ العداد</button>
                 <button type="button" id="pause-timer" class="warning-button">⏸️ إيقاف مؤقت</button>
                 <button type="button" id="resume-timer" class="info-button">▶️ استئناف</button>
                 <button type="button" id="end-trip" class="danger-button">🛑 إنهاء الرحلة</button>
             </div>
+
             <button type="submit" class="calculate-button">💰 احسب الأجرة</button>
         </form>
+
         <p id="fare-result">الأجرة: -- ريال</p>
+<!-- زر الانتقال إلى سجل المشاوير -->
+<button onclick="window.location.href='/history'" class="primary-button">📜 سجل المشاوير</button>
+
         <footer>
             <p>&copy; 2025 جميع الحقوق محفوظة. لا يُسمح بإعادة نشر أو توزيع أي جزء من هذا الموقع دون إذن مسبق من المالك.</p>
             <button onclick="window.location.href='/about'" class="about-button">من نحن</button>

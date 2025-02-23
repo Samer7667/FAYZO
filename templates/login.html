@@ -5,21 +5,21 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/taxi_logo.webp') }}">
 
     <!-- بيانات Open Graph لتحسين مشاركة الرابط -->
-    <meta property="og:title" content="🚖 حاسبة الأجرة - احسب تكلفة رحلتك بسهولة">
-    <meta property="og:description" content="حاسبة الأجرة تساعدك على معرفة تكلفة رحلتك بناءً على المسافة والزمن بكل شفافية.">
+    <meta property="og:title" content="FAYZO - حاسبة الأجرة">
+    <meta property="og:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
     <meta property="og:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
     <meta property="og:url" content="https://taxi-fare-app.onrender.com">
     <meta property="og:type" content="website">
 
     <!-- بيانات تويتر لتحسين مشاركة الرابط -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="🚖 حاسبة الأجرة - معرفة التكلفة بسهولة">
-    <meta name="twitter:description" content="احسب تكلفة رحلتك بكل شفافية بناءً على المسافة والزمن.">
+    <meta name="twitter:title" content="FAYZO - حاسبة الأجرة">
+    <meta name="twitter:description" content="احسب تكلفة رحلتك بسهولة وشفافية">
     <meta name="twitter:image" content="https://taxi-fare-app.onrender.com/static/images/taxi_logo.webp">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚖 تسجيل الدخول - حاسبة الأجرة</title>
+    <title>FAYZO - تسجيل الدخول</title>
     
     <!-- استدعاء ملف الـ CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
@@ -27,7 +27,7 @@
 <body class="login-body">
     <div class="login-container">
         <img src="{{ url_for('static', filename='images/taxi_logo.webp') }}" alt="شعار الموقع" class="logo">
-        <h2>🚖 تسجيل الدخول</h2>
+        <h2>FAYZO تسجيل الدخول إلى</h2>
         <form action="/login" method="POST">
             <input type="text" name="username" placeholder="أدخل اسمك" required>
             <button type="submit">تسجيل الدخول</button>

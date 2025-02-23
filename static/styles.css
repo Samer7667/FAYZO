@@ -8,7 +8,7 @@ body {
     transition: background-color 0.5s ease;
 }
 
-/* ضبط تصميم صفحة تسجيل الدخول */
+/* خلفية وصفحة تسجيل الدخول */
 .login-body {
     background: linear-gradient(135deg, #2ecc71, #27ae60);
     display: flex;
@@ -49,10 +49,14 @@ button {
     max-width: 200px;
 }
 
-button:hover { background-color: #27ae60; }
-button:active { transform: scale(0.95); }
+button:hover {
+    background-color: #27ae60;
+}
+button:active {
+    transform: scale(0.95);
+}
 
-/* تصميم زر تسجيل الخروج */
+/* زر تسجيل الخروج */
 .logout-button {
     background-color: #e74c3c;
     position: absolute;
@@ -62,7 +66,9 @@ button:active { transform: scale(0.95); }
     min-width: 100px;
 }
 
-.logout-button:hover { background-color: #c0392b; }
+.logout-button:hover {
+    background-color: #c0392b;
+}
 
 /* تنسيق الشعار */
 .logo {
@@ -72,11 +78,7 @@ button:active { transform: scale(0.95); }
     margin: 20px auto;
 }
 
-.about-page .logo {
-    display: block;
-}
-
-/* تنسيق الصفحة الرئيسية */
+/* الصفحة الرئيسية */
 .container {
     max-width: 90%;
     margin: auto;
@@ -100,16 +102,24 @@ button:active { transform: scale(0.95); }
     border-radius: 5px;
 }
 
-/* ضبط العناوين */
+/* تنسيق العناوين */
 h1, h2, h3 {
     color: #333;
 }
 
-/* تنسيق الصفحات المتجاوبة */
+/* الصفحات المتجاوبة */
 @media (max-width: 600px) {
-    button { font-size: 14px; padding: 10px; width: 100%; }
-    .container { padding: 10px; }
-    .input-group input { width: 100%; }
+    button {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+    }
+    .container {
+        padding: 10px;
+    }
+    .input-group input {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -122,4 +132,29 @@ h1, h2, h3 {
         width: 48%;
         margin: 5px;
     }
+}
+/* تصميم جدول سجل المشاوير */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.history-table th, .history-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.history-table th {
+    background-color: #3498db;
+    color: white;
+}
+
+.history-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.history-table tr:hover {
+    background-color: #ddd;
 }

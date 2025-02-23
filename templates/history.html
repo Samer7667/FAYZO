@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📜 سجل المشاوير - FAYZO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>📜 سجل المشاوير</h2>
+        
+        <!-- زر العودة إلى الصفحة الرئيسية -->
+        <button onclick="window.location.href='/home'" class="primary-button">🏠 العودة إلى الصفحة الرئيسية</button>
+
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>التاريخ</th>
+                    <th>المسافة (كم)</th>
+                    <th>المدة (دقائق)</th>
+                    <th>إحداثيات البداية</th>
+                    <th>إحداثيات الوجهة</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trip in trips %}
+                <tr>
+                    <td>{{ trip.timestamp }}</td>
+                    <td>{{ trip.distance_km }}</td>
+                    <td>{{ trip.duration_min }}</td>
+                    <td>{{ trip.start_lat }}, {{ trip.start_lon }}</td>
+                    <td>{{ trip.end_lat }}, {{ trip.end_lon }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- زر العودة -->
+        <button onclick="window.location.href='/home'" class="secondary-button">🔙 العودة</button>
+    </div>
+</body>
+</html>

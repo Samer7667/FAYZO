@@ -12,18 +12,21 @@ document.addEventListener("DOMContentLoaded", function() {
     let elapsedTime = 0;
     let isPaused = false;
 
+    // زر تحديد إحداثيات الموقع الحالي
     if (gpsButton) {
         gpsButton.addEventListener("click", function() {
             getLocation("start-lat", "start-lon", "start-time");
         });
     }
 
+    // زر تحديد إحداثيات الوجهة
     if (gpsDestinationButton) {
         gpsDestinationButton.addEventListener("click", function() {
             getLocation("end-lat", "end-lon");
         });
     }
 
+    // عند إرسال نموذج حساب الأجرة
     if (fareForm) {
         fareForm.addEventListener("submit", function(event) {
             event.preventDefault();
@@ -34,12 +37,17 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => response.json())
             .then(data => {
-                fareResult.innerText = `الأجرة: ${data.fare} ريال`;
+                if (data.error) {
+                    fareResult.innerText = `خطأ: ${data.error}`;
+                } else {
+                    fareResult.innerText = `الأجرة: ${data.fare} ريال`;
+                }
             })
             .catch(error => console.error("خطأ:", error));
         });
     }
 
+    // دالة للحصول على الموقع من المتصفح
     function getLocation(latField, lonField, timeField = null) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -56,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // دوال تشغيل العداد وإيقافه
     function startTimer() {
         elapsedTime = 0;
         isPaused = false;
@@ -80,8 +89,38 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(timerInterval);
         elapsedTime = 0;
         startTimerButton.innerText = "ابدأ العداد";
-    }
+        let startLat = document.getElementById("start-lat").value;
+        let startLon = document.getElementById("start-lon").value;
+        let endLat = document.getElementById("end-lat").value;
+        let endLon = document.getElementById("end-lon").value;
+    
+        if (!startLat || !startLon || !endLat || !endLon) {
+            alert("يجب إدخال الإحداثيات لحفظ الرحلة.");
+            return;
+        }
+    
+        let formData = new FormData();
+        formData.append("start_lat", startLat);
+        formData.append("start_lon", startLon);
+        formData.append("end_lat", endLat);
+        formData.append("end_lon", endLon);
+        formData.append("duration", elapsedTime);
+    
+        fetch("/save_trip", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("تم حفظ الرحلة بنجاح!");
+            } else {
+                alert("خطأ أثناء حفظ الرحلة: " + data.error);
+            }
+        })
+        .catch(error => console.error("خطأ:", error));
 
+    // ربط أزرار العداد بالدوال
     if (startTimerButton) startTimerButton.addEventListener("click", startTimer);
     if (pauseTimerButton) pauseTimerButton.addEventListener("click", pauseTimer);
     if (resumeTimerButton) resumeTimerButton.addEventListener("click", resumeTimer);
@@ -91,5 +130,5 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll("button").forEach(button => {
         button.style.transition = "none"; // منع أي تأثير تكبير أثناء التحويم
     });
-
+    
 });
