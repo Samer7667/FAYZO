@@ -1,0 +1,16 @@
+{
+    "name": "FAYZO",
+    "short_name": "FAYZO",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2ecc71",
+    "icons": [
+      {
+        "src": "/static/images/taxi_logo.webp",
+        "sizes": "192x192",
+        "type": "image/webp"
+      }
+    ]
+  }
+  

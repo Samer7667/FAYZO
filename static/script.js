@@ -132,4 +132,50 @@ document.addEventListener("DOMContentLoaded", function() {
         button.style.transition = "none"; // منع أي تأثير تكبير أثناء التحويم
     });
 
+    function checkPrayerTime() {
+        const prayerTimes = {
+            "Fajr": "04:30",
+            "Dhuhr": "12:15",
+            "Asr": "15:45",
+            "Maghrib": "18:10",
+            "Isha": "19:30"
+        };
+    
+        let now = new Date();
+        let currentTime = now.getHours() + ":" + (now.getMinutes() < 10 ? "0" : "") + now.getMinutes();
+    
+        for (let prayer in prayerTimes) {
+            if (currentTime === prayerTimes[prayer]) {
+                alert(`🕌 حان وقت صلاة ${prayer}!`);
+            }
+        }
+    }
+    
+    setInterval(checkPrayerTime, 60000); // فحص وقت الصلاة كل دقيقة
+    
+    function estimateUberFare(distance) {
+        const baseFare = 6; 
+        const costPerKm = 2.5;
+        const estimatedFare = baseFare + (costPerKm * distance);
+        return estimatedFare.toFixed(2);
+    }
+    
+    document.getElementById("fare-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        let startLat = parseFloat(document.getElementById("start-lat").value);
+        let startLon = parseFloat(document.getElementById("start-lon").value);
+        let endLat = parseFloat(document.getElementById("end-lat").value);
+        let endLon = parseFloat(document.getElementById("end-lon").value);
+    
+        if (!startLat || !startLon || !endLat || !endLon) {
+            alert("يجب إدخال الإحداثيات لحساب الأجرة.");
+            return;
+        }
+    
+        let distance = geodesic({latitude: startLat, longitude: startLon}, {latitude: endLat, longitude: endLon}).distance;
+        
+        document.getElementById("uber-fare").innerText = `💰 سعر أوبر المتوقع: ${estimateUberFare(distance)} ريال`;
+    });
+    
 });

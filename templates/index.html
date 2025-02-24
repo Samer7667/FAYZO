@@ -3,6 +3,8 @@
 <head>
     <!-- أيقونة الموقع (favicon) -->
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/taxi_logo.webp') }}">
+    
+    <link rel="manifest" href="/manifest.json">
 
     <!-- تحسين مشاركة الرابط على وسائل التواصل -->
     <meta property="og:title" content="FAYZO - حاسبة الأجرة">
@@ -42,7 +44,25 @@
 
         <form id="fare-form">
             <input type="hidden" id="trip-id" name="trip_id">
-
+            
+            <div class="input-group">
+                <label>💰 طريقة الدفع:</label>
+                <select id="payment-method" name="payment_method" required>
+                    <option value="cash">💵 الدفع نقدًا</option>
+                    <option value="transfer">🏦 تحويل بنكي</option>
+                    <option value="card">💳 بطاقة ائتمانية</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>🚖 اختر نوع السائق:</label>
+                <select id="driver-gender" name="driver_gender" required>
+                    <option value="any">أي سائق</option>
+                    <option value="male">سائق ذكر</option>
+                    <option value="female">سائقة أنثى</option>
+                </select>
+            </div>
+            
             <div class="input-group">
                 <label>📍 إحداثيات الموقع الحالي:</label>
                 <input type="text" id="start-lat" name="start_lat" placeholder="خط العرض" readonly required>
@@ -69,7 +89,8 @@
             <button type="submit" class="calculate-button">💰 احسب الأجرة</button>
         </form>
 
-        <p id="fare-result">الأجرة: -- ريال</p>
+        <p id="uber-fare">💰 سعر أوبر المتوقع: -- ريال</p>
+
 <!-- زر الانتقال إلى سجل المشاوير -->
 <button onclick="window.location.href='/history'" class="primary-button">📜 سجل المشاوير</button>
 

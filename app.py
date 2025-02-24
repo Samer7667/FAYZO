@@ -16,19 +16,14 @@ TRIP_HISTORY_FILE = "trip_history.json"
 active_trips = {}
 
 def calculate_fare(start_coords, end_coords, total_trip_time, fuel_price=2.5, fuel_efficiency=15):
-    """
-    دالة لحساب الأجرة:
-    - حساب المسافة بالكيلومتر.
-    - حساب استهلاك الوقود والتكاليف.
-    - حساب الأجرة بناءً على المسافة والوقت.
-    """
+   
     distance_km = geodesic(start_coords, end_coords).km
     fuel_used = distance_km / fuel_efficiency
     fuel_cost = fuel_used * fuel_price
 
-    base_fare = 5
-    cost_per_km = 2
-    cost_per_minute = 0.5
+    base_fare = 3  # خفضنا الأجرة الأساسية
+    cost_per_km = 1.5  # جعلناها أقل من أوبر
+    cost_per_minute = 0.4  # خفضناها لجعلها عادلة
 
     total_fare = base_fare + (cost_per_km * distance_km) + (cost_per_minute * (total_trip_time / 60)) + fuel_cost
     return round(total_fare, 2)
