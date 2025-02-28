@@ -101,18 +101,6 @@
     </main>
     
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-    <script>
-        fetch("https://statistics-y5qf.onrender.com/api/track", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                site_name: "my-portfolio" // غيّره لكل موقع (fayzo, timora)
-            })
-        }).catch(error => console.log("خطأ في إرسال البيانات: " + error));
-    </script>
     
 </body>
 </html>
